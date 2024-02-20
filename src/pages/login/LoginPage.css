@@ -7,7 +7,7 @@ main {
     background-color: #FCFCFC;
 }
 
-form {
+.LoginPage form {
     border: solid 1px rgba(28, 28, 28, 0.3);
     display: flex;
     flex-direction: column;
@@ -17,14 +17,14 @@ form {
     border-radius: 3px;
 }
 
-form input {
+.LoginPage form input {
     padding: 5px;
     font-size: 20px;
     border: solid 1px #1C1C1C;
     border-radius: 2px;
 }
 
-form label {
+.LoginPage form label {
     margin-top: 20px;
     margin-bottom: 5px;
 }
