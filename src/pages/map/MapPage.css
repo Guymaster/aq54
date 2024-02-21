@@ -26,6 +26,9 @@
 .MapPage .mapBox {
     width: 70%;
     text-align: center;
+    background-color: beige;
+    overflow: hidden;
+    height: 100%;
 }
 
 .MapPage .selectTimeBox {
@@ -109,6 +112,20 @@
     font-weight: bold;
 }
 
+.MapPage .mapSidebar {
+    background-color: rgb(35 55 75 / 90%);
+    color: #fff;
+    padding: 6px 12px;
+    font-family: monospace;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 12px;
+    border-radius: 4px;
+    max-width: 500px;
+}  
+
 @media (max-width: 600px) {
     .MapPage .sideBox {
         display: none;
@@ -146,5 +163,8 @@
     }
     .MapPage .closeBTN:hover {
         background-color: rgba(28, 28, 28, 0.3);
+    }
+    .MapPage .mapBox {
+        width: 100%;
     }
 }

@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./MapPage.css";
 import MeasurementItem from "./components/MeasurementItem";
 import { AggrTypes, SENSORS } from "../../common/values";
 import { minutesToHHhMMmn } from "../../common/parse";
 import { AppApi } from "../../api";
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function MapPage() {
     const defaultDateTime = () => {
@@ -13,50 +15,19 @@ function MapPage() {
         now.setSeconds(0);
         return now.toISOString().slice(0, 16);
     };
+    
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lng, setLng] = useState(SENSORS[0].longitude);
+    const [lat, setLat] = useState(SENSORS[0].latitude);
+    const [zoom, setZoom] = useState(12);
 
     const [selectedSensor, setSelectedSensor] = useState(SENSORS[0]);
     const [baseDate, setBaseDate] = useState(defaultDateTime());
     const [aggrType, setAggrType] = useState(AggrTypes.DAILY);
     const [interval, setInterval] = useState(5);
     const [isSideBoxVisibleOnMobile, setIsSideBoxVisibleOnMobile] = useState(false);
-    const [measurements, setMeasurements] = useState([
-        {
-            id: "1",
-            sensor_id: "2",
-            latitude: 2,
-            longitude: 2,
-            co: 3,
-            co2: 5,
-            no2: 6,
-            o3: 7,
-            pm10: 8,
-            pm25: 9,
-            rh: 10,
-            extT: 11,
-            intT: 12,
-            voc: 14,
-            created_at: new Date(),
-            updated_at: new Date()
-        },
-        {
-            id: "2",
-            sensor_id: "2",
-            latitude: 2,
-            longitude: 2,
-            co: 3,
-            co2: 5,
-            no2: 6,
-            o3: 7,
-            pm10: 8,
-            pm25: 9,
-            rh: 10,
-            extT: 11,
-            intT: 12,
-            voc: 14,
-            created_at: new Date(),
-            updated_at: new Date()
-        },
-    ]);
+    const [measurements, setMeasurements] = useState([]);
 
     const handleIncrementDate = (e) => {
         let d = new Date(baseDate);
@@ -125,6 +96,19 @@ function MapPage() {
     };
 
     useEffect(() => {
+        if (map.current) return; // initialize map only once
+        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [lng, lat],
+            zoom: zoom
+        });
+        map.current.on('move', () => {
+            setLng(map.current.getCenter().lng.toFixed(4));
+            setLat(map.current.getCenter().lat.toFixed(4));
+            setZoom(map.current.getZoom().toFixed(2));
+          });
         fetchDefaultData();
     }, []);
     useEffect(() => {
@@ -158,8 +142,11 @@ function MapPage() {
                 </div>
             </form>
         </div>
-        <div className="mapBox">
-            MAP WILL BE HERE
+        <div className="mapSidebar">
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | Déconnexion
+        </div>
+        <div className="mapBox map-container" ref={mapContainer}>
+            
         </div>
     </main>
     );
