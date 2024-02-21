@@ -1,0 +1,36 @@
+.HomePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.HomePage .title {
+    color: rgb(50, 50, 138);
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.HomePage .description {
+    font-size: 25px;
+    margin: 40px 20px;
+    max-width: 700px;
+    text-align: center;
+}
+
+.goBTN {
+    background-color: rgb(50, 50, 138);
+    color: #FCFCFC;
+    transition: 0.3s;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.goBTN:hover {
+    background-color: rgba(50, 50, 138, 0.7);
+    cursor: pointer;
+    transition: 0.3s;
+    color: #FCFCFC;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
