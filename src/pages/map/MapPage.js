@@ -4,7 +4,8 @@ import MeasurementItem from "./components/MeasurementItem";
 import { AggrTypes, SENSORS } from "../../common/values";
 import { minutesToHHhMMmn } from "../../common/parse";
 import { AppApi } from "../../api";
-import Map from 'react-map-gl';
+import Map, {Marker} from 'react-map-gl';
+import "./map.css";
 
 function MapPage() {
     const defaultDateTime = () => {
@@ -19,7 +20,7 @@ function MapPage() {
     const map = useRef(null);
     const [lng, setLng] = useState(SENSORS[0].longitude);
     const [lat, setLat] = useState(SENSORS[0].latitude);
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(14);
 
     const [selectedSensor, setSelectedSensor] = useState(SENSORS[0]);
     const [baseDate, setBaseDate] = useState(defaultDateTime());
@@ -109,6 +110,9 @@ function MapPage() {
                 { selectedSensor.id }
             </div>
             <div className="resultsBox">
+                {measurements.length == 0 &&
+                    "Il n'y pas de mesure enregistrée pour cette date."
+                }
                 {measurements.length > 0 &&
                     measurements.map((m, i) => (
                         <MeasurementItem data={m} index={i+1} key={m.id} />
@@ -137,14 +141,28 @@ function MapPage() {
                 initialViewState={{
                     longitude: lng,
                     latitude: lat,
-                    zoom: 12
+                    zoom: 15
                 }}
                 onMove={evt => {
                     setLat(evt.viewState.latitude);
                     setLng(evt.viewState.longitude);
+                    setZoom(evt.viewState.zoom);
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
-            />
+            >
+                {
+                    SENSORS.map(sensor => (
+                        <Marker longitude={sensor.longitude} latitude={sensor.latitude} rotation={-30} key={"marker"+sensor.id} onClick={(e) => {
+                            setSelectedSensor(sensor);
+                        }} >
+                            <div class="tooltip">
+                                <img src="/marker.png" height={70} style={{cursor: "pointer"}} />
+                                <span class="tooltiptext">{ sensor.id }</span>
+                            </div>
+                        </Marker>
+                    ))
+                }
+            </Map>
         </div>
     </main>
     );
