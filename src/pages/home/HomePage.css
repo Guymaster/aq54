@@ -18,7 +18,7 @@
     text-align: center;
 }
 
-.goBTN {
+.HomePage .goBTN {
     background-color: rgb(50, 50, 138);
     color: #FCFCFC;
     transition: 0.3s;
@@ -26,11 +26,20 @@
     border-radius: 3px;
 }
 
-.goBTN:hover {
+.HomePage .goBTN:hover {
     background-color: rgba(50, 50, 138, 0.7);
     cursor: pointer;
     transition: 0.3s;
     color: #FCFCFC;
     padding: 10px 20px;
     border-radius: 3px;
+}
+
+@media (max-width: 600px) {
+    .HomePage .title {
+        font-size: 40px;
+    }
+    .HomePage .description {
+        font-size: 18px;
+    }
 }
