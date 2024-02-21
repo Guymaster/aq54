@@ -29,7 +29,7 @@ main {
     margin-bottom: 5px;
 }
 
-form input:focus {
+.LoginPage input:focus {
     outline: none;
     border-color: rgb(50, 50, 138);
     box-shadow: none;

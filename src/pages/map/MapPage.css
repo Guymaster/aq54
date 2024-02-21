@@ -63,3 +63,34 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.timeInterval {
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.timeInterval:hover {
+    background-color: rgb(50, 50, 138);
+    color: #FCFCFC;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form input:focus {
+    outline: none;
+    border-color: rgb(50, 50, 138);
+    box-shadow: none;
+}
+
+form input {
+    padding: 5px;
+    border: solid 1px #1C1C1C;
+    border-radius: 2px;
+}
+
+.intervalBox {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    align-items: center;
+}
