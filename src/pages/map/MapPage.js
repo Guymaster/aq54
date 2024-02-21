@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./MapPage.css";
 import MeasurementItem from "./components/MeasurementItem";
 import { AggrTypes, SENSORS } from "../../common/values";
 import { minutesToHHhMMmn } from "../../common/parse";
+import { AppApi } from "../../api";
 
 function MapPage() {
     const defaultDateTime = () => {
@@ -54,7 +55,7 @@ function MapPage() {
             voc: 14,
             created_at: new Date(),
             updated_at: new Date()
-        }
+        },
     ]);
 
     const handleIncrementDate = (e) => {
@@ -95,6 +96,40 @@ function MapPage() {
     const handleToggleSideBoxVisibilityOnMobile = (e) => {
         setIsSideBoxVisibleOnMobile(!isSideBoxVisibleOnMobile);
     };
+    const fetchDefaultData = async () => {
+        let lastAggr = await AppApi.getLastMeasurementAggregation(selectedSensor.id);
+        if(!lastAggr){
+            return;
+        }
+        setAggrType(AggrTypes.DAILY);
+        let d = new Date(lastAggr.base_date);
+        d.setHours(0);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        setBaseDate(d.toISOString().slice(0, 16));
+        setInterval(lastAggr.interval);
+        setMeasurements(lastAggr.results.map(m => {
+            m.created_at = new Date(m.created_at);
+            m.updated_at = new Date(m.updated_at);
+            return m;
+        }));
+    };
+    const fetchData = async () => {
+        let aggr = await AppApi.getMeasurementsByAggregation(selectedSensor.id, new Date(baseDate), aggrType, interval);
+        setMeasurements(aggr.map(m => {
+            m.created_at = new Date(m.created_at);
+            m.updated_at = new Date(m.updated_at);
+            return m;
+        }));
+    };
+
+    useEffect(() => {
+        fetchDefaultData();
+    }, []);
+    useEffect(() => {
+        fetchData();
+    }, [interval, aggrType, baseDate, selectedSensor]);
 
     return (
     <main className="MapPage">
@@ -106,14 +141,14 @@ function MapPage() {
             <div className="resultsBox">
                 {measurements.length > 0 &&
                     measurements.map((m, i) => (
-                        <MeasurementItem data={m} index={i+1} />
+                        <MeasurementItem data={m} index={i+1} key={m.id} />
                     ))
                 }
             </div>
             <form className="timeForm">
                 <div className="selectTimeBox">
                     <div onClick={handleDecrementDate}>-</div>
-                    <input type="datetime-local" defaultValue={baseDate} onChange={(e) => setBaseDate(e.target.value)} value={baseDate} />
+                    <input type="datetime-local" onChange={(e) => setBaseDate(e.target.value)} value={baseDate} />
                     <div onClick={handleIncrementDate}>+</div>
                 </div>
                 <div className="timeInterval" onClick={handleToggleAggrType}>{ aggrType == AggrTypes.HOURLY? "HORAIRE" : "JOURNALIER" }</div>

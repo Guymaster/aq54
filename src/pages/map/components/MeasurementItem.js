@@ -56,66 +56,68 @@ function MeasurementItem(props) {
             </div>
             <div className="msmntBody">
                 <table>
-                    <tr>
-                        <th>CO</th>
-                        <td>
-                            {props.data.co? `${props.data.co} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>CO<sub>2</sub> </th>
-                        <td>
-                            {props.data.co2? `${props.data.co2} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>NO<sub>2</sub> </th>
-                        <td>
-                            {props.data.no2? `${props.data.no2} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>O<sub>3</sub> </th>
-                        <td>
-                            {props.data.o3? `${props.data.o3} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>PM10</th>
-                        <td>
-                            {props.data.pm10? `${props.data.pm10} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>PM2.5</th>
-                        <td>
-                            {props.data.pm25? `${props.data.pm25} µg/m³` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>RH</th>
-                        <td>
-                            {props.data.rh? `${props.data.rh} %` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Temp. externe</th>
-                        <td>
-                            {props.data.extT? `${props.data.extT} °C` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Temp. interne</th>
-                        <td>
-                            {props.data.intT? `${props.data.intT} °C` : ""}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>VOC</th>
-                        <td>
-                            {props.data.voc? `${props.data.voc} mg/m³` : ""}
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>CO</th>
+                            <td>
+                                {props.data.co? `${props.data.co} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>CO<sub>2</sub> </th>
+                            <td>
+                                {props.data.co2? `${props.data.co2} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>NO<sub>2</sub> </th>
+                            <td>
+                                {props.data.no2? `${props.data.no2} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>O<sub>3</sub> </th>
+                            <td>
+                                {props.data.o3? `${props.data.o3} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>PM10</th>
+                            <td>
+                                {props.data.pm10? `${props.data.pm10} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>PM2.5</th>
+                            <td>
+                                {props.data.pm25? `${props.data.pm25} µg/m³` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>RH</th>
+                            <td>
+                                {props.data.rh? `${props.data.rh} %` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Temp. externe</th>
+                            <td>
+                                {props.data.extT? `${props.data.extT} °C` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Temp. interne</th>
+                            <td>
+                                {props.data.intT? `${props.data.intT} °C` : ""}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>VOC</th>
+                            <td>
+                                {props.data.voc? `${props.data.voc} mg/m³` : ""}
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
