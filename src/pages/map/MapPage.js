@@ -133,7 +133,7 @@ function MapPage() {
             </form>
         </div>
         <div className="mapSidebar">
-            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | Déconnexion
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | <div className="lougoutBTN">Déconnexion</div>
         </div>
         <div className="mapBox map-container" ref={mapContainer}>
             <Map

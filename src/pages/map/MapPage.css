@@ -165,6 +165,18 @@
     opacity: 1;
 }
 
+.MapPage .lougoutBTN {
+    font-size: small;
+    font-weight: normal;
+    color: rgba(252, 252, 252, 0.7);
+    display: inline;
+}
+
+.MapPage .lougoutBTN:hover {
+    color: rgba(252, 252, 252, 1);
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .MapPage .sideBox {
         display: none;
