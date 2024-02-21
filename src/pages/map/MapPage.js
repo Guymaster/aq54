@@ -50,8 +50,8 @@ function MapPage() {
             </div>
             <div className="resultsBox">
                 {mesurements.length > 0 &&
-                    mesurements.map(m => (
-                        <MeasurementItem data={m} />
+                    mesurements.map((m, i) => (
+                        <MeasurementItem data={m} index={i+1} />
                     ))
                 }
             </div>
