@@ -1,0 +1,65 @@
+.sideBox {
+    border: solid 1px rgba(28, 28, 28, 0.3);
+    padding: 20px;
+    height: 100%;
+    width: 300px;
+    box-shadow: 1px 1px 20px #1C1C1C;
+    border-radius: 3px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.resultsBox {
+    height: 70%;
+    overflow: auto;
+}
+
+.MapPage {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.mapBox {
+    width: 70%;
+    text-align: center;
+}
+
+.selectTimeBox {
+    display: flex;
+    justify-content: center;
+    font-size: 27px;
+}
+
+.selectTimeBox input {
+    padding: 5px;
+    border: solid 1px #1C1C1C;
+    border-radius: 2px;
+}
+
+.selectTimeBox div {
+    width: 40px;
+    text-align: center;
+    margin: 0px 10px;
+    border-radius: 1px;
+}
+
+.selectTimeBox div:hover {
+    background-color: rgb(50, 50, 138);
+    color: #FCFCFC;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.timeInterval {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.sensorName {
+    color: rgb(50, 50, 138);
+    font-size: 20px;
+    font-weight: bold;
+}

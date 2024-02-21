@@ -1,0 +1,59 @@
+.msmntItem {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    border: solid 1px rgba(28, 28, 28, 0.6);
+    margin-bottom: 10px;
+}
+
+.msmntHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.msmntNumber {
+    font-size: 25px;
+}
+
+.msmntInfo {
+    text-align: right;
+}
+
+.msmntDate {
+    opacity: 0.8;
+    font-size: 15px;
+}
+
+.msmntItem .msmntBody {
+    transition: 0.3s;
+    display: none;
+}
+
+.msmntItem.expanded .msmntBody {
+    transition: 0.3s;
+    display: block;
+}
+
+.msmntItem table {
+    border: solid 1px rgba(28, 28, 28, 0.6);
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.msmntItem td, .msmntItem th {
+    border: solid 1px rgba(28, 28, 28, 0.6);
+    padding: 5px;
+}
+
+.msmntItem td {
+    text-align: right;
+    width: 70%;
+}
+
+.msmntItem th {
+    background-color: rgba(28, 28, 28, 0.2);
+    color: rgb(50, 50, 138);
+}
