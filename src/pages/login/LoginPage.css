@@ -54,3 +54,9 @@ main {
     transition: 0.3s;
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+    .LoginPage form {
+        width: 70%;
+    }
+}
