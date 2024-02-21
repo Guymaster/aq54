@@ -4,8 +4,7 @@ import MeasurementItem from "./components/MeasurementItem";
 import { AggrTypes, SENSORS } from "../../common/values";
 import { minutesToHHhMMmn } from "../../common/parse";
 import { AppApi } from "../../api";
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Map from 'react-map-gl';
 
 function MapPage() {
     const defaultDateTime = () => {
@@ -96,19 +95,6 @@ function MapPage() {
     };
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
-        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [lng, lat],
-            zoom: zoom
-        });
-        map.current.on('move', () => {
-            setLng(map.current.getCenter().lng.toFixed(4));
-            setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
-          });
         fetchDefaultData();
     }, []);
     useEffect(() => {
@@ -146,7 +132,19 @@ function MapPage() {
             Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | Déconnexion
         </div>
         <div className="mapBox map-container" ref={mapContainer}>
-            
+            <Map
+                mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                initialViewState={{
+                    longitude: lng,
+                    latitude: lat,
+                    zoom: 12
+                }}
+                onMove={evt => {
+                    setLat(evt.viewState.latitude);
+                    setLng(evt.viewState.longitude);
+                }}
+                mapStyle="mapbox://styles/mapbox/streets-v9"
+            />
         </div>
     </main>
     );
