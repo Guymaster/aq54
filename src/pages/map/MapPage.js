@@ -17,6 +17,7 @@ function MapPage() {
     const [baseDate, setBaseDate] = useState(defaultDateTime());
     const [aggrType, setAggrType] = useState(AggrTypes.DAILY);
     const [interval, setInterval] = useState(5);
+    const [isSideBoxVisibleOnMobile, setIsSideBoxVisibleOnMobile] = useState(false);
     const [measurements, setMeasurements] = useState([
         {
             id: "1",
@@ -91,10 +92,14 @@ function MapPage() {
             setInterval(0);
         }
     };
+    const handleToggleSideBoxVisibilityOnMobile = (e) => {
+        setIsSideBoxVisibleOnMobile(!isSideBoxVisibleOnMobile);
+    };
 
     return (
     <main className="MapPage">
-        <div className="sideBox">
+        <div className={isSideBoxVisibleOnMobile? "sideBox visibleOnMobile" : "sideBox"}>
+            <div className="closeBTN" onClick={handleToggleSideBoxVisibilityOnMobile}>X</div>
             <div className="sensorName">
                 { selectedSensor.id }
             </div>

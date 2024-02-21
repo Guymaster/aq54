@@ -1,17 +1,18 @@
-.sideBox {
+.MapPage .sideBox {
+    transition: 0.3s;
     border: solid 1px rgba(28, 28, 28, 0.3);
     padding: 20px;
     height: 100%;
     width: 300px;
-    box-shadow: 1px 1px 20px #1C1C1C;
     border-radius: 3px;
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background-color: #FCFCFC;
 }
 
-.resultsBox {
+.MapPage .resultsBox {
     height: 70%;
     overflow: auto;
 }
@@ -22,75 +23,128 @@
     overflow: hidden;
 }
 
-.mapBox {
+.MapPage .mapBox {
     width: 70%;
     text-align: center;
 }
 
-.selectTimeBox {
+.MapPage .selectTimeBox {
     display: flex;
     justify-content: center;
     font-size: 27px;
 }
 
-.selectTimeBox input {
+.MapPage .selectTimeBox input {
     padding: 5px;
     border: solid 1px #1C1C1C;
     border-radius: 2px;
 }
 
-.selectTimeBox div {
+.MapPage .selectTimeBox div {
     width: 40px;
     text-align: center;
     margin: 0px 10px;
     border-radius: 1px;
 }
 
-.selectTimeBox div:hover {
+.MapPage .selectTimeBox div:hover {
     background-color: rgb(50, 50, 138);
     color: #FCFCFC;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.timeInterval {
+.MapPage .timeInterval {
     text-align: center;
     margin-top: 10px;
 }
 
-.sensorName {
+.MapPage .sensorName {
     color: rgb(50, 50, 138);
     font-size: 20px;
     font-weight: bold;
 }
 
-.timeInterval {
+.MapPage .timeInterval {
     padding: 5px;
     border-radius: 2px;
 }
 
-.timeInterval:hover {
+.MapPage .timeInterval:hover {
     background-color: rgb(50, 50, 138);
     color: #FCFCFC;
     cursor: pointer;
     transition: 0.3s;
 }
 
-form input:focus {
+.MapPage input:focus {
     outline: none;
     border-color: rgb(50, 50, 138);
     box-shadow: none;
 }
 
-form input {
+.MapPage input {
     padding: 5px;
     border: solid 1px #1C1C1C;
     border-radius: 2px;
 }
 
-.intervalBox {
+.MapPage .intervalBox {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
     align-items: center;
+}
+
+.MapPage .intervalBox div {
+    text-align: right;
+}
+
+.MapPage .closeBTN {
+    transition: 0.3s;
+    position: fixed;
+    top: -50px;
+    left: calc(85% - 40px);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .MapPage .sideBox {
+        display: none;
+    }
+    .MapPage .sideBox.visibleOnMobile {
+        display: flex;
+        transition: 0.3s;
+        border: solid 1px rgba(28, 28, 28, 0.3);
+        height: 90%;
+        width: 70%;
+        box-shadow: 1px 1px 20px #1C1C1C;
+        position: fixed;
+    }
+    .MapPage .selectTimeBox {
+        font-size: 18px;
+    }
+    .MapPage .sensorName {
+        font-size: 18px;
+    }
+    .MapPage .intervalBox {
+        font-size: 15px;
+    }
+    .MapPage .timeInterval {
+        font-size: 15px;
+    }
+    .MapPage .sideBox.visibleOnMobile .closeBTN {
+        display: block;
+        position: fixed;
+        transition: 0.3s;
+        top: calc(5% - 10px);
+        padding: 10px 20px;
+    }
+    .MapPage .closeBTN {
+        display: none;
+    }
+    .MapPage .closeBTN:hover {
+        background-color: rgba(28, 28, 28, 0.3);
+    }
 }

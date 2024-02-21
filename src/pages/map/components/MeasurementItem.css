@@ -70,3 +70,18 @@
 .msmntItem sub {
     color: rgb(50, 50, 138);
 }
+
+@media (max-width: 600px) {
+    .msmntNumber {
+        font-size: 20px;
+    }
+    .msmntLocation {
+        font-size: 18px;
+    }
+    .msmntDate {
+        font-size: 15px;
+    }
+    .msmntItem th, .msmntItem td {
+        font-size: 15px;
+    }
+}
