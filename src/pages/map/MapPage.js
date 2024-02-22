@@ -173,6 +173,7 @@ function MapPage() {
                     SENSORS.map(sensor => (
                         <Marker longitude={sensor.longitude} latitude={sensor.latitude} rotation={-30} key={"marker"+sensor.id} onClick={(e) => {
                             setSelectedSensor(sensor);
+                            setIsSideBoxVisibleOnMobile(true);
                         }} >
                             <div className="tooltip">
                                 <img src="/marker.png" height={70} style={{cursor: "pointer"}} />
