@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "@firebase/auth";
 import { getApp } from "./firebase_init.js";
 
 export class AuthService {
@@ -15,6 +15,18 @@ export class AuthService {
             return credentials;
         } catch (error) {
             return null;
+        }
+    };
+    static async onAuthStateChanged(callback){
+        const auth = getAuth(this.#app);
+        return onAuthStateChanged(auth, callback)
+    };
+    static async signOut(){
+        const auth = getAuth(this.#app);
+        try {
+            await signOut(auth);
+        } catch (error) {
+            //
         }
     };
 }

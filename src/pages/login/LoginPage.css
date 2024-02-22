@@ -49,6 +49,10 @@ main {
     transition: 0.3s;
 }
 
+.submitBTN.denied {
+    background-color: rgb(133, 41, 20);
+}
+
 .submitBTN:hover {
     background-color: rgba(50, 50, 138, 0.7);
     transition: 0.3s;

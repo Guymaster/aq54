@@ -1,39 +1,55 @@
 import { useState } from "react";
 import "./../../fonts/ubuntu.css";
 import "./LoginPage.css";
+import { AuthService } from "../../auth";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDenied, setIsDenied] = useState(false);
+  const navigate = useNavigate();
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setIsDenied(false);
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setIsDenied(false);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    let user = await AuthService.signIn(email, password);
+    setIsLoading(false);
+    if(user){
+      navigate("/map");
+    }
+    else{
+      setIsDenied(true);
+    }
   };
 
   return (
     <main className="LoginPage">
       <form>
-          <div className="formTitle">Enter you credentials</div>
-          <label>Username</label>
+          <div className="formTitle">Entrez vos identifiants</div>
+          <label>Email</label>
           <input 
             type="text"
-            value={username} 
-            onChange={handleUsernameChange}
+            value={email} 
+            onChange={handleEmailChange}
           />
-          <label>Password</label>
+          <label>Mot de Passe</label>
           <input 
             type="password" 
             value={password}
+            required
             onChange={handlePasswordChange}
           />
-          <input className="submitBTN" type="submit" onClick={handleSubmit} value={isLoading? "..." : "Connexion"} />
+          <input className={isDenied? "submitBTN denied" : "submitBTN"} type="submit" onClick={handleSubmit} value={isDenied? "Accès refusé" : (isLoading? "..." : "Connexion")} disabled={isDenied} required />
       </form>
     </main>
   );

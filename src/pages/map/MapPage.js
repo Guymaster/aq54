@@ -6,6 +6,8 @@ import { minutesToHHhMMmn } from "../../common/parse";
 import { AppApi } from "../../api";
 import Map, {Marker} from 'react-map-gl';
 import "./map.css";
+import { AuthService } from "../../auth";
+import { useNavigate } from "react-router-dom";
 
 function MapPage() {
     const defaultDateTime = () => {
@@ -21,6 +23,7 @@ function MapPage() {
     const [lng, setLng] = useState(SENSORS[0].longitude);
     const [lat, setLat] = useState(SENSORS[0].latitude);
     const [zoom, setZoom] = useState(14);
+    const [user, setUser] = useState(null);
 
     const [selectedSensor, setSelectedSensor] = useState(SENSORS[0]);
     const [baseDate, setBaseDate] = useState(defaultDateTime());
@@ -28,6 +31,8 @@ function MapPage() {
     const [interval, setInterval] = useState(5);
     const [isSideBoxVisibleOnMobile, setIsSideBoxVisibleOnMobile] = useState(false);
     const [measurements, setMeasurements] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleIncrementDate = (e) => {
         let d = new Date(baseDate);
@@ -68,7 +73,10 @@ function MapPage() {
         setIsSideBoxVisibleOnMobile(!isSideBoxVisibleOnMobile);
     };
     const fetchDefaultData = async () => {
-        let lastAggr = await AppApi.getLastMeasurementAggregation(selectedSensor.id);
+        if(!user){
+            return;
+        }
+        let lastAggr = await AppApi.getLastMeasurementAggregation(selectedSensor.id, (await user.getIdToken()));
         if(!lastAggr){
             return;
         }
@@ -87,7 +95,10 @@ function MapPage() {
         }));
     };
     const fetchData = async () => {
-        let aggr = await AppApi.getMeasurementsByAggregation(selectedSensor.id, new Date(baseDate), aggrType, interval);
+        if(!user){
+            return;
+        }
+        let aggr = await AppApi.getMeasurementsByAggregation(selectedSensor.id, new Date(baseDate), aggrType, interval, (await user.getIdToken()));
         setMeasurements(aggr.map(m => {
             m.created_at = new Date(m.created_at);
             m.updated_at = new Date(m.updated_at);
@@ -96,7 +107,15 @@ function MapPage() {
     };
 
     useEffect(() => {
-        fetchDefaultData();
+        AuthService.onAuthStateChanged(async (_user) => {
+            if(_user){
+                setUser(_user);
+                fetchDefaultData();
+            }
+            else{
+                navigate("/login");
+            }
+        })
     }, []);
     useEffect(() => {
         fetchData();
@@ -133,7 +152,7 @@ function MapPage() {
             </form>
         </div>
         <div className="mapSidebar">
-            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | <div className="lougoutBTN">Déconnexion</div>
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom} | <div className="lougoutBTN" onClick={(e) => {AuthService.signOut()}} >Déconnexion</div>
         </div>
         <div className="mapBox map-container" ref={mapContainer}>
             <Map
@@ -155,9 +174,9 @@ function MapPage() {
                         <Marker longitude={sensor.longitude} latitude={sensor.latitude} rotation={-30} key={"marker"+sensor.id} onClick={(e) => {
                             setSelectedSensor(sensor);
                         }} >
-                            <div class="tooltip">
+                            <div className="tooltip">
                                 <img src="/marker.png" height={70} style={{cursor: "pointer"}} />
-                                <span class="tooltiptext">{ sensor.id }</span>
+                                <span className="tooltiptext">{ sensor.id }</span>
                             </div>
                         </Marker>
                     ))

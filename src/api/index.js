@@ -13,8 +13,9 @@ export class AppApi {
      * @param {Date} baseDate 
      * @param {AggrTypes} aggrType 
      * @param {number} interval 
+     * @param {string} token
      */
-    static async getMeasurementsByAggregation(sensorId, baseDate, aggrType, interval){
+    static async getMeasurementsByAggregation(sensorId, baseDate, aggrType, interval, token){
         try {
             let response = await axios.get(`${ApiConfig.HOST}:${ApiConfig.PORT}/sensors/${sensorId}/measurements?base_date=${baseDate.toISOString()}&aggr_type=${aggrType}&interval=${interval}`);
             if(response.status != 200){
@@ -29,13 +30,15 @@ export class AppApi {
     /**
      * 
      * @param {string} sensorId 
+     * @param {string} token
      */
-    static async getLastMeasurementAggregation(sensorId){
+    static async getLastMeasurementAggregation(sensorId, token){
         try {
             let response = await axios.get(`${ApiConfig.HOST}:${ApiConfig.PORT}/sensors/${sensorId}/measurements/last`, {
                 mode: 'cors',
                 headers: {
-                  'Access-Control-Allow-Origin':'*'
+                  'Access-Control-Allow-Origin':'*',
+                  'Authorization': `Bearer ${token}`
                 }
             });
             if(response.status != 200){
