@@ -31,6 +31,7 @@ function MapPage() {
     const [interval, setInterval] = useState(5);
     const [isSideBoxVisibleOnMobile, setIsSideBoxVisibleOnMobile] = useState(false);
     const [measurements, setMeasurements] = useState([]);
+    const [isDefault, setIsDefault] = useState(true);
 
     const navigate = useNavigate();
 
@@ -72,7 +73,7 @@ function MapPage() {
     const handleToggleSideBoxVisibilityOnMobile = (e) => {
         setIsSideBoxVisibleOnMobile(!isSideBoxVisibleOnMobile);
     };
-    const fetchDefaultData = async () => {
+    const fetchDefaultData = async () => {console.log("USER")
         if(!user){
             return;
         }
@@ -93,6 +94,7 @@ function MapPage() {
             m.updated_at = new Date(m.updated_at);
             return m;
         }));
+        setIsDefault(false);
     };
     const fetchData = async () => {
         if(!user){
@@ -110,7 +112,6 @@ function MapPage() {
         AuthService.onAuthStateChanged(async (_user) => {
             if(_user){
                 setUser(_user);
-                fetchDefaultData();
             }
             else{
                 navigate("/login");
@@ -118,8 +119,16 @@ function MapPage() {
         })
     }, []);
     useEffect(() => {
-        fetchData();
+        if(!isDefault){
+            fetchData();
+        }
     }, [interval, aggrType, baseDate, selectedSensor]);
+    useEffect(() => {
+        console.log("exec", isDefault)
+        if(isDefault){
+            fetchDefaultData();
+        }
+    }, [user]);
 
     return (
     <main className="MapPage">
