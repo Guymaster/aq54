@@ -124,7 +124,6 @@ function MapPage() {
         }
     }, [interval, aggrType, baseDate, selectedSensor]);
     useEffect(() => {
-        console.log("exec", isDefault)
         if(isDefault){
             fetchDefaultData();
         }
