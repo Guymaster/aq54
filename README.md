@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# AQ54 Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application web permettant de consulter l'historique des mesures effectuées par les capteurs SMART188 et SMART199. Réalisée avec ReactJS.
 
-## Available Scripts
+## Comment exécuter ?
 
-In the project directory, you can run:
+Cette application est censée communiquer avec d'autres services et donc il est préférable de passer [par ce repository](https://github.com/Guymaster/aq54-start) qui simplifie la configuration et le lancement.
 
-### `npm start`
+Si toutefois, vous voulez lancer uniquement cette application, vous pouvez suivre les étapes suivantes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Commencez par cloner ce dépot en ouvrant un terminal pour y entrer la ligne suivante :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+git clone https://github.com/Guymaster/aq54.git
+```
 
-### `npm test`
+Ouvrez le nouveau dossier aq54 et créez-y un fichier environnement nommé `.env`. Vous devez y renseigner les variables d'environnement de la manière suivante :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+PORT=3000
+NODE_ENV=prod
 
-### `npm run build`
+# Api
+REACT_APP_API_HOST=<Adresse du serveur aq54-backend>
+REACT_APP_API_PORT=<Port d'écoute du serveur aq54-backend>
+REACT_APP_MAPBOX_TOKEN=<Token Mapbox>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Firebase
+REACT_APP_FIREBASE_API_KEY=<Api key Firebase>
+REACT_APP_FIREBASE_AUTH_DOMAIN=<Auth domain Firebase>
+REACT_APP_FIREBASE_PROJECT_ID=<Project ID Firebase>
+REACT_APP_FIREBASE_STORAGE_BUCKET=<Storage bucket Firebase>
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=<Messaging sender Firebase>
+REACT_APP_FIREBASE_APP_ID=<App ID Firebase>
+REACT_APP_FIREBASE_MEASUREMENT_ID=<Measurement ID Firebase>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Vous avez dû recevoir ces informations par mail. Si ce n'est pas cas, veuillez me contacter.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ouvrez un terminal dans le repertoire aq54 et installez les dépendances en entrant :
 
-### `npm run eject`
+```
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Dans le même terminal, suivez l'une des étapes suivantes pour lancer l'appication.
+### Lancer en mode développement
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Entrez :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Accédez à l'application via `localhost:3000`
+### Lancer en mode production (avec Docker)
 
-## Learn More
+Entrez successivement :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+docker build -t aq54-frontend .
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+docker run --name aq54-frontend -p 3000:80  aq54-frontend
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Accédez à l'application via `localhost:3000`
