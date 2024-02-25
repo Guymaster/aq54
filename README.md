@@ -35,7 +35,7 @@ REACT_APP_FIREBASE_APP_ID=<App ID Firebase>
 REACT_APP_FIREBASE_MEASUREMENT_ID=<Measurement ID Firebase>
 ```
 
-Vous avez dû recevoir ces informations par mail. Si ce n'est pas cas, veuillez me contacter.
+### Lancer en mode développement
 
 Ouvrez un terminal dans le repertoire aq54 et installez les dépendances en entrant :
 
@@ -43,19 +43,17 @@ Ouvrez un terminal dans le repertoire aq54 et installez les dépendances en entr
 npm install
 ```
 
-Dans le même terminal, suivez l'une des étapes suivantes pour lancer l'appication.
-### Lancer en mode développement
-
-Entrez :
+Ensuite, lancez avec :
 
 ```
 npm start
 ```
 
 Accédez à l'application via `localhost:3000`
+
 ### Lancer en mode production (avec Docker)
 
-Entrez successivement :
+Ouvrez un terminal dans le repertoire aq54 et et entrez:
 
 ```
 docker build -t aq54-frontend .
