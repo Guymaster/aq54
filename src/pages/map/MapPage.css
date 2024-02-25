@@ -15,6 +15,7 @@
 .MapPage .resultsBox {
     height: 70%;
     overflow: auto;
+    padding: 3px;
 }
 
 .MapPage {
@@ -175,6 +176,26 @@
 .MapPage .lougoutBTN:hover {
     color: rgba(252, 252, 252, 1);
     cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.4);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
 }
 
 @media (max-width: 600px) {
